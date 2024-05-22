@@ -1,0 +1,26 @@
+#Docker Compose - Connecting two application
+
+version: '3.8'
+
+services:
+  app1:
+    image: myapp1:latest
+    container_name: app1_container
+    networks:
+      - my_network
+    ports:
+      - "8080:8080"
+    depends_on:
+      - app2
+
+  app2:
+    image: myapp2:latest
+    container_name: app2_container
+    networks:
+      - my_network
+    ports:
+      - "9090:9090"
+
+networks:
+  my_network:
+    driver: bridge
